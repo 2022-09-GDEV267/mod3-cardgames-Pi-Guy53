@@ -1,0 +1,30 @@
+﻿<Properties StartupConfiguration="{CDCB9FF1-B0D8-9896-49BF-A354D759C54C}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/01-Prospector/__Scripts/Prospector.cs">
+    <Files>
+      <File FileName="Assets/01-Prospector/__Scripts/Deck.cs" Line="1" Column="1" />
+      <File FileName="Assets/01-Prospector/__Scripts/Prospector.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="mod3-cardgames-Pi-Guy53" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="01-Prospector" expanded="True">
+                <Node name="__Scripts" expanded="True">
+                  <Node name="Prospector.cs" selected="True" />
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="9ffcdf78-7e3e-48a2-8a21-0d2923d57729" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

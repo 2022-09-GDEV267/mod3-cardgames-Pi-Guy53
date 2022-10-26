@@ -27,6 +27,11 @@ public class Card : MonoBehaviour {
 		}
 	}
 
+	public virtual void OnMouseUpAsButton()
+    {
+		print(name);
+    }
+
 	void Start ()
 	{
 		SetSortOrder(0);

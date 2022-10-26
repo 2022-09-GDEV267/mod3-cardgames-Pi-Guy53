@@ -64,27 +64,27 @@ public class Prospector : MonoBehaviour
 		}
 
 		return CP1;
-    }
+	}
 
 	CardProspector Draw()
-    {
+	{
 		CardProspector cd = drawPile[0];
 		drawPile.RemoveAt(0);
 		return cd;
-    }
+	}
 
 	void LayoutGame()
-    {
-		if(layoutAnchor == null)
-        {
+	{
+		if (layoutAnchor == null)
+		{
 			layoutAnchor = new GameObject("_LayoutAnchor").transform;
 			layoutAnchor.transform.position = layoutCenter;
-        }
+		}
 
 		CardProspector cp;
 
 		foreach (SlotDef tSD in layout.slotDefs)
-        {
+		{
 			cp = Draw();
 			cp.faceUp = tSD.faceUp;
 			cp.transform.parent = layoutAnchor;
@@ -97,7 +97,42 @@ public class Prospector : MonoBehaviour
 			cp.SetSortingLayerName(tSD.layerName);
 
 			tableau.Add(cp);
+		}
+	}
+
+	void MoveToDiscard(CardProspector cd)
+	{
+		cd.state = eCardState.discard;
+		discardPile.Add(cd);
+		cd.transform.parent = layoutAnchor;
+
+		cd.transform.localPosition = new Vector3(layout.multiplier.x * layout.discardPile.x, layout.multiplier.y * layout.discardPile.y, -layout.discardPile.layerID + .5f);
+		cd.faceUp = true;
+
+		cd.SetSortingLayerName(layout.discardPile.layerName);
+		cd.SetSortOrder(-100 + discardPile.Count);
+	}
+
+	void MoveToTarget(CardProspector cd)
+    {
+		if(target !=null)
+        {
+			MoveToDiscard(target);
         }
+		target = cd;
+		cd.state = eCardState.target;
+		cd.transform.parent = layoutAnchor;
+
+		cd.transform.localPosition = new Vector3(layout.multiplier.x * layout.discardPile.x, layout.multiplier.y * layout.discardPile.y, -layout.discardPile.layerID);
+
+		cd.faceUp = true;
+		cd.SetSortingLayerName(layout.discardPile.layerName);
+		cd.SetSortOrder(0);
+    }
+
+	void UpdateDrawPile()
+    {
+
     }
 
 }

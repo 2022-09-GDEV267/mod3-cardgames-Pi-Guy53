@@ -1,8 +1,10 @@
 ﻿<Properties StartupConfiguration="{CDCB9FF1-B0D8-9896-49BF-A354D759C54C}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/01-Prospector/__Scripts/Prospector.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/01-Prospector/Resources/LayoutXML.xml">
     <Files>
-      <File FileName="Assets/01-Prospector/__Scripts/Deck.cs" Line="1" Column="1" />
-      <File FileName="Assets/01-Prospector/__Scripts/Prospector.cs" Line="1" Column="1" />
+      <File FileName="Assets/01-Prospector/__Scripts/Deck.cs" Line="265" Column="52" />
+      <File FileName="Assets/01-Prospector/__Scripts/Prospector.cs" Line="33" Column="79" />
+      <File FileName="Assets/01-Prospector/__Scripts/Layout.cs" Line="58" Column="60" />
+      <File FileName="Assets/01-Prospector/Resources/LayoutXML.xml" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -10,8 +12,9 @@
           <Node name="mod3-cardgames-Pi-Guy53" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="01-Prospector" expanded="True">
-                <Node name="__Scripts" expanded="True">
-                  <Node name="Prospector.cs" selected="True" />
+                <Node name="__Scripts" expanded="True" />
+                <Node name="Resources" expanded="True">
+                  <Node name="LayoutXML.xml" selected="True" />
                 </Node>
               </Node>
             </Node>
@@ -22,7 +25,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="9ffcdf78-7e3e-48a2-8a21-0d2923d57729" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="c100c6f5-9571-4159-80e8-124a891ef9f6" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

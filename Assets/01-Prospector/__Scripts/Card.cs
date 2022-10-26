@@ -61,7 +61,7 @@ public class Card : MonoBehaviour {
 
 		foreach(SpriteRenderer tSR in spriteRenderers)
         {
-			if(tSR.gameObject == this.gameObject)
+			if(tSR.gameObject == gameObject)
             {
 				tSR.sortingOrder = sOrd;
 				continue;
@@ -74,6 +74,10 @@ public class Card : MonoBehaviour {
 					break;
 
 				case "face":
+					tSR.sortingOrder = sOrd + 1;
+					break;
+
+				default:
 					tSR.sortingOrder = sOrd + 1;
 					break;
             }

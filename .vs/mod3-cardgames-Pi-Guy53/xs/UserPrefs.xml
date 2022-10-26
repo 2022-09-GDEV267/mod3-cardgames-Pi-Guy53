@@ -1,10 +1,11 @@
 ﻿<Properties StartupConfiguration="{CDCB9FF1-B0D8-9896-49BF-A354D759C54C}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/01-Prospector/Resources/LayoutXML.xml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/01-Prospector/__Scripts/CardProspector.cs">
     <Files>
       <File FileName="Assets/01-Prospector/__Scripts/Deck.cs" Line="265" Column="52" />
-      <File FileName="Assets/01-Prospector/__Scripts/Prospector.cs" Line="33" Column="79" />
-      <File FileName="Assets/01-Prospector/__Scripts/Layout.cs" Line="58" Column="60" />
-      <File FileName="Assets/01-Prospector/Resources/LayoutXML.xml" Line="1" Column="1" />
+      <File FileName="Assets/01-Prospector/__Scripts/Prospector.cs" Line="41" Column="37" />
+      <File FileName="Assets/01-Prospector/__Scripts/Layout.cs" Line="84" Column="27" />
+      <File FileName="Assets/01-Prospector/Resources/LayoutXML.xml" Line="1" Column="6" />
+      <File FileName="Assets/01-Prospector/__Scripts/CardProspector.cs" Line="5" Column="44" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -12,10 +13,10 @@
           <Node name="mod3-cardgames-Pi-Guy53" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="01-Prospector" expanded="True">
-                <Node name="__Scripts" expanded="True" />
-                <Node name="Resources" expanded="True">
-                  <Node name="LayoutXML.xml" selected="True" />
+                <Node name="__Scripts" expanded="True">
+                  <Node name="CardProspector.cs" selected="True" />
                 </Node>
+                <Node name="Resources" expanded="True" />
               </Node>
             </Node>
           </Node>

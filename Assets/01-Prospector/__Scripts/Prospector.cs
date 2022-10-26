@@ -12,7 +12,7 @@ public class Prospector : MonoBehaviour
 	[Header("Set in Inspector")]
 	public TextAsset deckXML;
 	public TextAsset layoutXML;
-
+	public List<CardProspector> drawPile;
 
 	[Header("Set Dynamically")]
 	public Deck deck;
@@ -39,6 +39,22 @@ public class Prospector : MonoBehaviour
 
 		layout = GetComponent<Layout>();
 		layout.ReadLayout(layoutXML.text);
+
+		drawPile = ConvertListCardsToListCardProspectors(deck.cards);
 	}
+
+	List<CardProspector> ConvertListCardsToListCardProspectors(List<Card> CD1)
+	{
+		List<CardProspector> CP1 = new List<CardProspector>();
+		CardProspector tCP;
+
+		foreach (Card tCD in CD1)
+		{
+			tCP = tCD as CardProspector;
+			CP1.Add(tCP);
+		}
+
+		return CP1;
+    }
 
 }

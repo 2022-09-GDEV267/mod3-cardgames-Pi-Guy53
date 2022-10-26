@@ -103,7 +103,7 @@ public class Prospector : MonoBehaviour
         {
 			foreach(int hid in tCP.slotDef.hiddenBy)
             {
-				cp = FindCardByLayout(hid);
+				cp = FindCardByLayoutID(hid);
 				tCP.hiddenBy.Add(cp);
             }
         }
@@ -113,11 +113,35 @@ public class Prospector : MonoBehaviour
 		UpdateDrawPile();
 	}
 
-	CardProspector FindCardByLayout(int layoutID)
+	CardProspector FindCardByLayoutID(int layoutID)
     {
-
+		foreach(CardProspector tCP in tableau)
+        {
+			if(tCP.layoutID == layoutID)
+            {
+				return tCP;
+            }
+        }
 
 		return null;
+    }
+
+	void SetTableauFaces()
+    {
+		foreach(CardProspector cd in tableau)
+        {
+			bool faceUp = true;
+
+			foreach(CardProspector cover in cd.hiddenBy)
+            {
+				if(cover.state == eCardState.tableau)
+                {
+					faceUp = false;
+                }
+            }
+
+			cd.faceUp = faceUp;
+        }
     }
 
 	void MoveToDiscard(CardProspector cd)
@@ -200,6 +224,7 @@ public class Prospector : MonoBehaviour
 
 				tableau.Remove(cd);
 				MoveToTarget(cd);
+				SetTableauFaces();
 				break;
         }
     }

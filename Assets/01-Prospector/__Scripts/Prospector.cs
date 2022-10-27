@@ -195,9 +195,9 @@ public class Prospector : MonoBehaviour
 
 
 	public void CardClicked(CardProspector cd)
-    {
+	{
 		switch (cd.state)
-        {
+		{
 			case eCardState.target:
 				break;
 
@@ -205,31 +205,35 @@ public class Prospector : MonoBehaviour
 				MoveToDiscard(target);
 				MoveToTarget(Draw());
 				UpdateDrawPile();
+
+				ScoreManager.EVENT(eScoreEvent.draw);
 				break;
 
 			case eCardState.tableau:
 				bool validMatch = true;
-				if(!cd.faceUp)
-                {
+				if (!cd.faceUp)
+				{
 					validMatch = false;
-                }
-				if(!AdjacentRank(cd, target))
-                {
+				}
+				if (!AdjacentRank(cd, target))
+				{
 					validMatch = false;
-                }
-				if(!validMatch)
-                {
+				}
+				if (!validMatch)
+				{
 					return;
-                }
+				}
 
 				tableau.Remove(cd);
 				MoveToTarget(cd);
 				SetTableauFaces();
+
+				ScoreManager.EVENT(eScoreEvent.mine);
 				break;
-        }
+		}
 
 		CheckForGameOver();
-    }
+	}
 
 	void CheckForGameOver()
     {
@@ -239,17 +243,17 @@ public class Prospector : MonoBehaviour
 			return;
         }
 
-		if(drawPile.Count > 0)
+		foreach (CardProspector cd in tableau)
+		{
+			if (AdjacentRank(cd, target))
+			{
+				return;
+			}
+		}
+
+		if (drawPile.Count > 0)
         {
 			return;
-        }
-
-		foreach(CardProspector cd in tableau)
-        {
-			if(AdjacentRank(cd, target))
-            {
-				return;
-            }
         }
 
 		GameOver(false);
@@ -259,12 +263,12 @@ public class Prospector : MonoBehaviour
     {
 		if(won)
         {
-			print("you won");
-        }
+			ScoreManager.EVENT(eScoreEvent.gameWin);
+		}
         else
         {
-			print("you lost");
-        }
+			ScoreManager.EVENT(eScoreEvent.gameLoss);
+		}
 
 		SceneManager.LoadScene("__Prospector");
     }

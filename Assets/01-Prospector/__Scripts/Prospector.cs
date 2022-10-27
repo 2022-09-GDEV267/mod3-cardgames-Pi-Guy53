@@ -30,11 +30,16 @@ public class Prospector : MonoBehaviour
 	public Vector2 fsPosMid2 = new Vector2(.4f, 1f);
 	public Vector2 fsPosEnd = new Vector2(.5f, .95f);
 
+	public Text gameOverTxt, roundResultTxt, highScoreTxt;
+
 	public FloatingScore fsRun;
+
+	public float reloadDelay = 2;
 
 	void Awake()
 	{
 		S = this;
+		SetUpUIText();
 	}
 
 	void Start()
@@ -60,6 +65,38 @@ public class Prospector : MonoBehaviour
 
 		LayoutGame();
 	}
+
+	void SetUpUIText()
+    {
+		GameObject go = GameObject.Find("highScore");
+		if(go!= null)
+        {
+			highScoreTxt = go.GetComponent<Text>();
+        }
+		int highScore = ScoreManager.HIGH_SCORE;
+		string hScore = "high Score: " + Utils.AddCommasToNumber(highScore);
+		go.GetComponent<Text>().text = hScore;
+
+		go = GameObject.Find("GameOver");
+        if (go != null)
+		{
+			gameOverTxt = go.GetComponent<Text>();
+        }
+
+		go = GameObject.Find("RoundResults");
+        if( go != null)
+		{
+			roundResultTxt = go.GetComponent<Text>();
+        }
+
+		ShowResultsUI(false);
+    }
+
+	void ShowResultsUI(bool show)
+    {
+		gameOverTxt.gameObject.SetActive(show);
+		roundResultTxt.gameObject.SetActive(show);
+    }
 
 	List<CardProspector> ConvertListCardsToListCardProspectors(List<Card> CD1)
 	{
@@ -272,19 +309,43 @@ public class Prospector : MonoBehaviour
 
 	void GameOver(bool won)
     {
+		int score = ScoreManager.SCORE;
+		if (fsRun != null) score += fsRun.score;
+
 		if(won)
         {
+			gameOverTxt.text = "Round Won";
+			roundResultTxt.text = "you won this round!\nRound Score: " + score;
+
 			ScoreManager.EVENT(eScoreEvent.gameWin);
 			FloatingScoreHandler(eScoreEvent.gameWin);
 		}
         else
         {
+			gameOverTxt.text = "Game Over";
+			if(ScoreManager.HIGH_SCORE <= score)
+            {
+				string str = "New High Score!\nHigh Score: " + score;
+				roundResultTxt.text = str;
+            }
+            else
+            {
+				roundResultTxt.text = "Your final Score: " + score;
+            }
+
 			ScoreManager.EVENT(eScoreEvent.gameLoss);
 			FloatingScoreHandler(eScoreEvent.gameLoss);
 		}
 
-		SceneManager.LoadScene("__Prospector");
+		ShowResultsUI(true);
+
+		Invoke("reloadLevel", reloadDelay);
     }
+
+	void reloadLevel()
+	{
+		SceneManager.LoadScene("__Prospector");
+	}
 
 	public bool AdjacentRank(CardProspector c0, CardProspector c1)
     {

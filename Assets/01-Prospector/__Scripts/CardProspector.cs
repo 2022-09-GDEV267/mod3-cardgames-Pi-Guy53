@@ -11,6 +11,8 @@ public class CardProspector : Card
     public int layoutID;
     public SlotDef slotDef;
 
+    public bool isGold;
+
     public override void OnMouseUpAsButton()
     {
         Prospector.S.CardClicked(this);

@@ -12,6 +12,8 @@ public class ScoreManager : MonoBehaviour
     public static int HIGH_SCORE = 0;
 
     public int chain = 0, scoreRun = 0, score = 0;
+    public int scoreMulti;
+    public static int prevScoreMulti;
 
     private void Awake()
     {
@@ -24,6 +26,8 @@ public class ScoreManager : MonoBehaviour
 
         score += SCORE_FROM_PREV_ROUND;
         SCORE_FROM_PREV_ROUND = 0;
+
+        scoreMulti = 1;
     }
 
     public static void EVENT(eScoreEvent evt)
@@ -46,12 +50,23 @@ public class ScoreManager : MonoBehaviour
             case eScoreEvent.gameWin:
             case eScoreEvent.gameLoss:
                 chain = 0;
+
+                scoreRun *= scoreMulti;
+
                 score += scoreRun;
                 scoreRun = 0;
+
+                prevScoreMulti = scoreMulti;
+                scoreMulti = 1;
                 break;
             case eScoreEvent.mine:
                 chain++;
                 scoreRun += chain;
+                break;
+            case eScoreEvent.mineGold:
+                chain++;
+                scoreRun += chain;
+                scoreMulti *= 2;
                 break;
         }
 

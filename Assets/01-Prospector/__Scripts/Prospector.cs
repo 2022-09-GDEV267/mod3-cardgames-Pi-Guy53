@@ -36,6 +36,8 @@ public class Prospector : MonoBehaviour
 
 	public float reloadDelay = 2;
 
+	public Sprite goldBack, goldFront;
+
 	void Awake()
 	{
 		S = this;
@@ -154,10 +156,25 @@ public class Prospector : MonoBehaviour
             }
         }
 
+		SetGoldCards();
+
 		MoveToTarget(Draw());
 
 		UpdateDrawPile();
 	}
+
+	void SetGoldCards()
+    {
+		for(int i = 0; i < tableau.Count; i++)
+        {
+			if (Random.value <= .10f)
+			{
+				tableau[i].GetComponent<CardProspector>().isGold = true;
+				tableau[i].back.GetComponent<SpriteRenderer>().sprite = goldBack;
+				tableau[i].GetComponent<SpriteRenderer>().sprite = goldFront;
+			}
+		}
+    }
 
 	CardProspector FindCardByLayoutID(int layoutID)
     {
@@ -275,8 +292,17 @@ public class Prospector : MonoBehaviour
 				MoveToTarget(cd);
 				SetTableauFaces();
 
-				ScoreManager.EVENT(eScoreEvent.mine);
+				if (cd.isGold)
+				{
+					ScoreManager.EVENT(eScoreEvent.mineGold);
+				}
+				else
+				{
+					ScoreManager.EVENT(eScoreEvent.mine);
+				}
+
 				FloatingScoreHandler(eScoreEvent.mine);
+
 				break;
 		}
 
@@ -388,6 +414,7 @@ public class Prospector : MonoBehaviour
 					fsRun.reportFinishTo = ScoreBoard.s.gameObject;
 					fsRun.Init(fsPts, 0, 1);
 					fsRun.fontSizes = new List<float>(new float[] { 28, 36, 4 });
+					fsRun.score *= ScoreManager.prevScoreMulti;
 					fsRun = null;
 				}
 				break;

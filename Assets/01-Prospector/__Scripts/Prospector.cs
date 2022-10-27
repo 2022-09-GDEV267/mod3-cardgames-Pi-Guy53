@@ -66,6 +66,16 @@ public class Prospector : MonoBehaviour
 		ScoreBoard.s.score = ScoreManager.SCORE;
 
 		LayoutGame();
+
+		/*
+		 * To Display as a face up grid of cards
+		 * 
+		CardProspector cp;
+		for(int i = 0; i < 52; i++)
+		{
+			cp = Draw();
+			cp.faceUp = true;
+		} */
 	}
 
 	void SetUpUIText()

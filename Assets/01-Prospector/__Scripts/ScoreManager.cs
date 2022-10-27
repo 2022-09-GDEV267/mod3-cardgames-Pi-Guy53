@@ -6,7 +6,7 @@ public enum eScoreEvent {  draw, mine, mineGold, gameWin, gameLoss}
 
 public class ScoreManager : MonoBehaviour
 {
-    private static ScoreManager s;
+    public static ScoreManager s;
 
     public static int SCORE_FROM_PREV_ROUND;
     public static int HIGH_SCORE = 0;
@@ -15,10 +15,7 @@ public class ScoreManager : MonoBehaviour
 
     private void Awake()
     {
-        if (s == null)
-        {
-            s = this;
-        }
+        s = this;
 
         if (PlayerPrefs.HasKey("ProspectorHighScore"))
         {

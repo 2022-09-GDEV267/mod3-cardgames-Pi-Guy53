@@ -25,6 +25,13 @@ public class Prospector : MonoBehaviour
 	public List<CardProspector> tableau;
 	public List<CardProspector> discardPile;
 
+	public Vector2 fsPosMid = new Vector2(.5f, .9f);
+	public Vector2 fsPosrun = new Vector2(.5f, .75f);
+	public Vector2 fsPosMid2 = new Vector2(.4f, 1f);
+	public Vector2 fsPosEnd = new Vector2(.5f, .95f);
+
+	public FloatingScore fsRun;
+
 	void Awake()
 	{
 		S = this;
@@ -48,6 +55,8 @@ public class Prospector : MonoBehaviour
 		layout.ReadLayout(layoutXML.text);
 
 		drawPile = ConvertListCardsToListCardProspectors(deck.cards);
+
+		ScoreBoard.s.score = ScoreManager.SCORE;
 
 		LayoutGame();
 	}
@@ -207,6 +216,7 @@ public class Prospector : MonoBehaviour
 				UpdateDrawPile();
 
 				ScoreManager.EVENT(eScoreEvent.draw);
+				FloatingScoreHandler(eScoreEvent.draw);
 				break;
 
 			case eCardState.tableau:
@@ -229,6 +239,7 @@ public class Prospector : MonoBehaviour
 				SetTableauFaces();
 
 				ScoreManager.EVENT(eScoreEvent.mine);
+				FloatingScoreHandler(eScoreEvent.mine);
 				break;
 		}
 
@@ -264,10 +275,12 @@ public class Prospector : MonoBehaviour
 		if(won)
         {
 			ScoreManager.EVENT(eScoreEvent.gameWin);
+			FloatingScoreHandler(eScoreEvent.gameWin);
 		}
         else
         {
 			ScoreManager.EVENT(eScoreEvent.gameLoss);
+			FloatingScoreHandler(eScoreEvent.gameLoss);
 		}
 
 		SceneManager.LoadScene("__Prospector");
@@ -295,5 +308,53 @@ public class Prospector : MonoBehaviour
         }
 
 		return false;
+    }
+
+	void FloatingScoreHandler(eScoreEvent evt)
+    {
+		List<Vector2> fsPts;
+        switch(evt)
+        {
+			case eScoreEvent.draw:
+			case eScoreEvent.gameWin:
+			case eScoreEvent.gameLoss:
+				if (fsRun != null)
+                {
+					fsPts = new List<Vector2>();
+					fsPts.Add(fsPosrun);
+					fsPts.Add(fsPosMid2);
+					fsPts.Add(fsPosEnd);
+					fsRun.reportFinishTo = ScoreBoard.s.gameObject;
+					fsRun.Init(fsPts, 0, 1);
+					fsRun.fontSizes = new List<float>(new float[] { 28, 36, 4 });
+					fsRun = null;
+				}
+				break;
+
+			case eScoreEvent.mine:
+				FloatingScore fs;
+				Vector2 p0 = Input.mousePosition;
+				p0.x /= Screen.width;
+				p0.y /= Screen.height;
+
+				fsPts = new List<Vector2>();
+				fsPts.Add(p0);
+				fsPts.Add(fsPosMid);
+				fsPts.Add(fsPosrun);
+				fs = ScoreBoard.s.CreateFloatingScore(ScoreManager.CHAIN, fsPts);
+
+				fs.fontSizes = new List<float>(new float[] { 4, 50, 28 });
+				if(fsRun == null)
+                {
+					fsRun = fs;
+					fsRun.reportFinishTo = null;
+                }
+                else
+                {
+					fs.reportFinishTo = fsRun.gameObject;
+                }
+				break;
+
+        }
     }
 }

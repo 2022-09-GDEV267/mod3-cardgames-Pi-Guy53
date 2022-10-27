@@ -22,7 +22,7 @@ public class ScoreBoard : MonoBehaviour
         set
         {
             _score += value;
-            _scoreString = score.ToString("NO");
+            scoreString = ScoreManager.s.score.ToString();
         }
     }
 
@@ -41,10 +41,7 @@ public class ScoreBoard : MonoBehaviour
 
     private void Awake()
     {
-        if(s == null)
-        {
-            s = this;
-        }
+        s = this;
 
         canvasTrans = transform.parent;
     }

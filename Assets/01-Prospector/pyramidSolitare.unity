@@ -408,7 +408,7 @@ MonoBehaviour:
   layoutXML: {fileID: 4900000, guid: bed72d775e1c14b7e8fbe093db0d66c2, type: 3}
   xOffset: 3
   yOffest: -2.5
-  layoutCenter: {x: 0, y: 0, z: 0}
+  layoutCenter: {x: 0, y: -2, z: 0}
   deck: {fileID: 0}
   layout: {fileID: 0}
   drawPile: []

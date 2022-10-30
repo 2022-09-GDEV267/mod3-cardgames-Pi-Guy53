@@ -83,6 +83,9 @@ public class Pyramid : MonoBehaviour
 				tCP.hiddenBy.Add(cp);
 			}
 		}
+
+		MoveToTarget(Draw());
+		UpdateDrawPile();
 	}
 
 	CardPyramid FindCardByLayoutID(int layoutID)
@@ -110,5 +113,54 @@ public class Pyramid : MonoBehaviour
 		}
 
 		return CP1;
+	}
+
+	void MoveToDiscard(CardPyramid cd)
+	{
+		cd.state = pCardState.discard;
+		discardPile.Add(cd);
+		cd.transform.parent = layoutAnchor;
+
+		cd.transform.localPosition = new Vector3(layout.multiplier.x * layout.discardPile.x, layout.multiplier.y * layout.discardPile.y, -layout.discardPile.layerID + .5f);
+		cd.faceUp = true;
+
+		cd.SetSortingLayerName(layout.discardPile.layerName);
+		cd.SetSortOrder(-100 + discardPile.Count);
+	}
+
+	void MoveToTarget(CardPyramid cd)
+	{
+		if (target != null)
+		{
+			MoveToDiscard(target);
+		}
+		target = cd;
+		cd.state = pCardState.target;
+
+		cd.transform.parent = layoutAnchor;
+		cd.transform.localPosition = new Vector3(layout.multiplier.x * layout.discardPile.x, layout.multiplier.y * layout.discardPile.y, -layout.discardPile.layerID);
+
+		cd.faceUp = true;
+		cd.SetSortingLayerName(layout.discardPile.layerName);
+		cd.SetSortOrder(0);
+	}
+
+	void UpdateDrawPile()
+	{
+		CardPyramid cd;
+
+		for (int i = 0; i < drawPile.Count; i++)
+		{
+			cd = drawPile[i];
+			cd.transform.parent = layoutAnchor;
+
+			Vector2 dpStagger = layout.drawPile.stagger;
+			cd.transform.localPosition = new Vector3(layout.multiplier.x * (layout.drawPile.x + i * dpStagger.x), layout.multiplier.y * (layout.drawPile.y + i * dpStagger.y), -layout.drawPile.layerID + .1f * i);
+
+			cd.faceUp = false;
+			cd.state = pCardState.drawpile;
+			cd.SetSortingLayerName(layout.drawPile.layerName);
+			cd.SetSortOrder(-10 * i);
+		}
 	}
 }

@@ -1,12 +1,12 @@
 ﻿<Properties StartupConfiguration="{CDCB9FF1-B0D8-9896-49BF-A354D759C54C}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/01-Prospector/__Scripts/Prospector.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/01-Prospector/_pyramid Scripts/Pyramid.cs">
     <Files>
       <File FileName="Assets/01-Prospector/__Scripts/Deck.cs" Line="265" Column="20" />
-      <File FileName="Assets/01-Prospector/__Scripts/Prospector.cs" Line="132" Column="3" />
+      <File FileName="Assets/01-Prospector/__Scripts/Prospector.cs" Line="171" Column="1" />
       <File FileName="Assets/01-Prospector/__Scripts/Layout.cs" Line="28" Column="111" />
       <File FileName="Assets/01-Prospector/__Scripts/CardProspector.cs" Line="19" Column="6" />
       <File FileName="Assets/01-Prospector/__Scripts/Card.cs" Line="32" Column="1" />
-      <File FileName="Assets/01-Prospector/_pyramid Scripts/Pyramid.cs" Line="65" Column="27" />
+      <File FileName="Assets/01-Prospector/_pyramid Scripts/Pyramid.cs" Line="87" Column="24" />
       <File FileName="Assets/01-Prospector/_pyramid Scripts/CardPyramid.cs" Line="18" Column="1" />
     </Files>
     <Pads>
@@ -15,10 +15,10 @@
           <Node name="mod3-cardgames-Pi-Guy53" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="01-Prospector" expanded="True">
-                <Node name="__Scripts" expanded="True">
-                  <Node name="Prospector.cs" selected="True" />
+                <Node name="__Scripts" expanded="True" />
+                <Node name="_pyramid Scripts" expanded="True">
+                  <Node name="Pyramid.cs" selected="True" />
                 </Node>
-                <Node name="_pyramid Scripts" expanded="True" />
                 <Node name="Resources" expanded="True" />
               </Node>
             </Node>

@@ -1,15 +1,13 @@
 ﻿<Properties StartupConfiguration="{CDCB9FF1-B0D8-9896-49BF-A354D759C54C}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/01-Prospector/__Scripts/ScoreBoard.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/01-Prospector/__Scripts/Prospector.cs">
     <Files>
-      <File FileName="Assets/01-Prospector/__Scripts/Deck.cs" Line="265" Column="52" />
-      <File FileName="Assets/01-Prospector/__Scripts/Prospector.cs" Line="252" Column="4" />
-      <File FileName="Assets/01-Prospector/__Scripts/Layout.cs" Line="86" Column="27" />
-      <File FileName="Assets/01-Prospector/Resources/LayoutXML.xml" Line="1" Column="6" />
-      <File FileName="Assets/01-Prospector/__Scripts/CardProspector.cs" Line="16" Column="40" />
+      <File FileName="Assets/01-Prospector/__Scripts/Deck.cs" Line="265" Column="20" />
+      <File FileName="Assets/01-Prospector/__Scripts/Prospector.cs" Line="132" Column="3" />
+      <File FileName="Assets/01-Prospector/__Scripts/Layout.cs" Line="28" Column="111" />
+      <File FileName="Assets/01-Prospector/__Scripts/CardProspector.cs" Line="19" Column="6" />
       <File FileName="Assets/01-Prospector/__Scripts/Card.cs" Line="32" Column="1" />
-      <File FileName="Assets/01-Prospector/__Scripts/ScoreManager.cs" Line="72" Column="70" />
-      <File FileName="Assets/01-Prospector/__Scripts/FloatingScore.cs" Line="111" Column="53" />
-      <File FileName="Assets/01-Prospector/__Scripts/ScoreBoard.cs" Line="4" Column="4" />
+      <File FileName="Assets/01-Prospector/_pyramid Scripts/Pyramid.cs" Line="65" Column="27" />
+      <File FileName="Assets/01-Prospector/_pyramid Scripts/CardPyramid.cs" Line="18" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -18,8 +16,9 @@
             <Node name="Assets" expanded="True">
               <Node name="01-Prospector" expanded="True">
                 <Node name="__Scripts" expanded="True">
-                  <Node name="ScoreBoard.cs" selected="True" />
+                  <Node name="Prospector.cs" selected="True" />
                 </Node>
+                <Node name="_pyramid Scripts" expanded="True" />
                 <Node name="Resources" expanded="True" />
               </Node>
             </Node>
@@ -30,7 +29,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="c100c6f5-9571-4159-80e8-124a891ef9f6" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="e995b0ea-5068-40e4-9518-d062af02beaf" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

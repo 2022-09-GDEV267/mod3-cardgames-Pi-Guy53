@@ -22,6 +22,11 @@ public class Pyramid : MonoBehaviour
 	public List<CardPyramid> pyramidLayout;
 	public List<CardPyramid> discardPile;
 
+	private bool waitForSecondCard;
+	private int currentValue;
+	private CardPyramid firstCardSelected;
+	private CardPyramid secondCardSelected;
+
     private void Awake()
     {
 		S = this;
@@ -40,6 +45,8 @@ public class Pyramid : MonoBehaviour
 		drawPile = ConvertListCardsToListCardPyramid(deck.cards);
 
 		LayoutGame();
+
+		waitForSecondCard = false;
 	}
 
 	CardPyramid Draw()
@@ -134,6 +141,7 @@ public class Pyramid : MonoBehaviour
 		{
 			MoveToDiscard(target);
 		}
+
 		target = cd;
 		cd.state = pCardState.target;
 
@@ -163,4 +171,68 @@ public class Pyramid : MonoBehaviour
 			cd.SetSortOrder(-10 * i);
 		}
 	}
+
+	public void cardClicked(CardPyramid cd)
+    {
+		switch(cd.state)
+        {
+			case pCardState.drawpile:
+			case pCardState.secondDraw:
+
+				break;
+
+			case pCardState.discard:
+
+				break;
+
+			case pCardState.target:
+
+				break;
+
+			case pCardState.pyramid:
+
+				if (cd.faceUp)
+				{
+					if (waitForSecondCard)
+					{
+						if (cd != firstCardSelected)
+						{
+							secondCardSelected = cd;
+							currentValue += cd.rank;
+
+							waitForSecondCard = false;
+						}
+                        else
+                        {
+							firstCardSelected = null;
+							waitForSecondCard = false;
+							currentValue = 0;
+                        }
+					}
+					else
+					{
+						firstCardSelected = cd;
+						currentValue = cd.rank;
+
+						waitForSecondCard = true;
+					}
+				}
+				checkScoreing();
+
+				break;
+        }
+    }
+
+	void checkScoreing()
+    {
+		print(currentValue);
+
+		if(currentValue == 13)
+        {
+			waitForSecondCard = false;
+			currentValue = 0;
+
+			//score a point
+        }
+    }
 }

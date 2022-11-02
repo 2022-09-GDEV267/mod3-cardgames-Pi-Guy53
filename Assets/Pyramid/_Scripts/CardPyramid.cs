@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum pCardState { drawpile, pyramid, target, secondTarget, discard }
+public enum pCardState { drawpile, secondDraw, pyramid, target, discard }
 
 public class CardPyramid : Card
 {
@@ -15,6 +15,6 @@ public class CardPyramid : Card
 
     public override void OnMouseUpAsButton()
     {
-
+        Pyramid.S.cardClicked(this);
     }
 }

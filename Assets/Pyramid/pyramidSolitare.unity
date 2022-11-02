@@ -408,7 +408,7 @@ MonoBehaviour:
   layoutXML: {fileID: 4900000, guid: bed72d775e1c14b7e8fbe093db0d66c2, type: 3}
   xOffset: 3
   yOffest: -2.5
-  layoutCenter: {x: 0, y: -2, z: 0}
+  layoutCenter: {x: 0, y: 0, z: 0}
   deck: {fileID: 0}
   layout: {fileID: 0}
   drawPile: []
@@ -694,7 +694,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c8ca95433cc67409b8b7e8c5fed52cce, type: 2}
+  - {fileID: 2100000, guid: bfe6790701f604ebd96cdb9de7109f95, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

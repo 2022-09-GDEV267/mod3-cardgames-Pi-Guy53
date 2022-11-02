@@ -2,22 +2,26 @@
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Pyramid/_Scripts/Pyramid.cs">
     <Files>
       <File FileName="Assets/01-Prospector/__Scripts/Deck.cs" Line="265" Column="20" />
-      <File FileName="Assets/01-Prospector/__Scripts/Prospector.cs" />
+      <File FileName="Assets/01-Prospector/__Scripts/Prospector.cs" Line="171" Column="1" />
       <File FileName="Assets/01-Prospector/__Scripts/Layout.cs" />
       <File FileName="Assets/01-Prospector/__Scripts/CardProspector.cs" />
-      <File FileName="Assets/01-Prospector/__Scripts/Card.cs" />
-      <File FileName="Assets/Pyramid/_Scripts/CardPyramid.cs" Line="1" Column="1" />
-      <File FileName="Assets/Pyramid/_Scripts/Pyramid.cs" Line="1" Column="1" />
+      <File FileName="Assets/01-Prospector/__Scripts/Card.cs" Line="32" Column="1" />
+      <File FileName="Assets/Pyramid/_Scripts/CardPyramid.cs" Line="18" Column="37" />
+      <File FileName="Assets/Pyramid/_Scripts/Pyramid.cs" Line="209" Column="25" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="mod3-cardgames-Pi-Guy53" expanded="True">
             <Node name="Assets" expanded="True">
+              <Node name="01-Prospector" expanded="True">
+                <Node name="__Scripts" expanded="True" />
+              </Node>
               <Node name="Pyramid" expanded="True">
                 <Node name="_Scripts" expanded="True">
                   <Node name="Pyramid.cs" selected="True" />
                 </Node>
+                <Node name="resources" expanded="True" />
               </Node>
             </Node>
           </Node>

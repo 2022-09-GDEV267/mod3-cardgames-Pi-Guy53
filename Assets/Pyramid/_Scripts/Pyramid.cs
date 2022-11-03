@@ -29,6 +29,8 @@ public class Pyramid : MonoBehaviour
 
 	private List<CardPyramid> targetStack = new List<CardPyramid>();
 
+	public GameObject selectIndicator1;
+
     private void Awake()
     {
 		S = this;
@@ -95,6 +97,7 @@ public class Pyramid : MonoBehaviour
 
 		UpdateDrawPile();
 		SetPyramidVisiblity();
+		showIndicators();
 	}
 
 	CardPyramid FindCardByLayoutID(int layoutID)
@@ -218,6 +221,19 @@ public class Pyramid : MonoBehaviour
 			case pCardState.drawpile:
 				MoveToTarget(Draw());
 				UpdateDrawPile();
+
+				waitForSecondCard = false; 
+				firstCardSelected = null;
+				secondCardSelected = null;
+
+				currentValue = 0;
+				showIndicators();
+
+				if(!checkValidMatches())
+                {
+					print("GAME OVER");
+                }					
+
 				break;
 
 			case pCardState.discard:
@@ -260,11 +276,27 @@ public class Pyramid : MonoBehaviour
 						print("first card selected");
 					}
 				}
+
 				checkScoreing();
+				showIndicators();
 
 				break;
         }
     }
+
+	void showIndicators()
+    {
+
+		if (firstCardSelected != null)
+		{
+			selectIndicator1.SetActive(true);
+			selectIndicator1.transform.position = firstCardSelected.transform.position;
+		}
+		else
+		{
+			selectIndicator1.SetActive(false);
+		}
+	}
 
 	void checkScoreing()
     {
@@ -292,6 +324,61 @@ public class Pyramid : MonoBehaviour
 		else if (!waitForSecondCard)
 		{
 			print("not a match:" + currentValue);
+			firstCardSelected = null;
+			secondCardSelected = null;
 		}
+
+		if(checkValidMatches())
+        {
+			//still possible matches
+        }
+        else
+        {
+			print("game over");
+        }
+	}
+
+	bool checkValidMatches()
+    {
+		bool valid = false;
+
+		if (drawPile.Count > 0)
+		{
+			return true;
+		}
+
+		if (target!=null && target.rank == 13)
+        {
+			return true;
+        }
+
+		foreach(CardPyramid cd in pyramidLayout)
+        {
+            if (!cd.isHidden)
+            {
+				if (cd.rank == 13)
+				{
+					return true;
+				}
+
+				if (target != null && cd.rank + target.rank == 13)
+                {
+					return true;
+                }
+
+				foreach(CardPyramid checkCd in pyramidLayout)
+                {
+					if(!checkCd.isHidden)
+                    {
+						if(cd.rank + checkCd.rank == 13)
+                        {
+							return true;
+                        }
+                    }
+                }
+            }
+        }
+
+		return valid;
     }
 }

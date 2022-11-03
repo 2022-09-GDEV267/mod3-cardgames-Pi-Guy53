@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum pCardState { drawpile, secondDraw, pyramid, target, discard }
+public enum pCardState { drawpile, pyramid, target, discard }
 
 public class CardPyramid : Card
 {
@@ -11,7 +11,7 @@ public class CardPyramid : Card
     public int layoutID;
     public SlotDef slotDef;
 
-    public bool isGold;
+    public bool isHidden;
 
     public override void OnMouseUpAsButton()
     {

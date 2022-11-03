@@ -27,6 +27,8 @@ public class Pyramid : MonoBehaviour
 	private CardPyramid firstCardSelected;
 	private CardPyramid secondCardSelected;
 
+	private List<CardPyramid> targetStack = new List<CardPyramid>();
+
     private void Awake()
     {
 		S = this;
@@ -91,8 +93,8 @@ public class Pyramid : MonoBehaviour
 			}
 		}
 
-		MoveToTarget(Draw());
 		UpdateDrawPile();
+		SetPyramidVisiblity();
 	}
 
 	CardPyramid FindCardByLayoutID(int layoutID)
@@ -124,12 +126,19 @@ public class Pyramid : MonoBehaviour
 
 	void MoveToDiscard(CardPyramid cd)
 	{
+		if(cd.state == pCardState.target)
+        {
+			RemoveFromTarget(cd);
+        }
+
 		cd.state = pCardState.discard;
 		discardPile.Add(cd);
+		pyramidLayout.Remove(cd);
+
 		cd.transform.parent = layoutAnchor;
 
-		cd.transform.localPosition = new Vector3(layout.multiplier.x * layout.discardPile.x, layout.multiplier.y * layout.discardPile.y, -layout.discardPile.layerID + .5f);
-		cd.faceUp = true;
+		cd.transform.localPosition = new Vector3(layout.multiplier.x * layout.discardPile.x, layout.multiplier.y * layout.discardPile.y, layout.discardPile.layerID + .5f);
+		cd.faceUp = false;
 
 		cd.SetSortingLayerName(layout.discardPile.layerName);
 		cd.SetSortOrder(-100 + discardPile.Count);
@@ -137,10 +146,22 @@ public class Pyramid : MonoBehaviour
 
 	void MoveToTarget(CardPyramid cd)
 	{
-		if (target != null)
-		{
-			MoveToDiscard(target);
-		}
+		target = cd;
+		targetStack.Add(target);
+
+		cd.state = pCardState.target;
+
+		cd.transform.parent = layoutAnchor;
+		cd.transform.localPosition = new Vector3(layout.multiplier.x * layout.discardPile.x, layout.multiplier.y * layout.discardPile.y, -targetStack.Count);
+
+		cd.faceUp = true;
+		cd.SetSortingLayerName(layout.discardPile.layerName);
+		target.SetSortOrder(targetStack.Count * 2);
+	}
+
+	void RemoveFromTarget(CardPyramid cd)
+    {
+		targetStack.Remove(cd);
 
 		target = cd;
 		cd.state = pCardState.target;
@@ -148,7 +169,7 @@ public class Pyramid : MonoBehaviour
 		cd.transform.parent = layoutAnchor;
 		cd.transform.localPosition = new Vector3(layout.multiplier.x * layout.discardPile.x, layout.multiplier.y * layout.discardPile.y, -layout.discardPile.layerID);
 
-		cd.faceUp = true;
+		cd.faceUp = false;
 		cd.SetSortingLayerName(layout.discardPile.layerName);
 		cd.SetSortOrder(0);
 	}
@@ -172,26 +193,41 @@ public class Pyramid : MonoBehaviour
 		}
 	}
 
+	void SetPyramidVisiblity()
+	{
+		foreach (CardPyramid cd in pyramidLayout)
+		{
+			bool isHidden = false;
+
+			foreach (CardPyramid cover in cd.hiddenBy)
+			{
+				if (cover.state == pCardState.pyramid)
+				{
+					isHidden = true;
+				}
+			}
+
+			cd.isHidden = isHidden;
+		}
+	}
+
 	public void cardClicked(CardPyramid cd)
     {
 		switch(cd.state)
         {
 			case pCardState.drawpile:
-			case pCardState.secondDraw:
-
+				MoveToTarget(Draw());
+				UpdateDrawPile();
 				break;
 
 			case pCardState.discard:
-
+				//do nothing, discards are out of play
 				break;
 
 			case pCardState.target:
-
-				break;
-
 			case pCardState.pyramid:
 
-				if (cd.faceUp)
+				if (!cd.isHidden)
 				{
 					if (waitForSecondCard)
 					{
@@ -201,12 +237,17 @@ public class Pyramid : MonoBehaviour
 							currentValue += cd.rank;
 
 							waitForSecondCard = false;
+
+							print("second card selected:");
 						}
                         else
                         {
 							firstCardSelected = null;
+							secondCardSelected = null;
 							waitForSecondCard = false;
 							currentValue = 0;
+
+							print("same card selected: deselecting first card");
                         }
 					}
 					else
@@ -215,6 +256,8 @@ public class Pyramid : MonoBehaviour
 						currentValue = cd.rank;
 
 						waitForSecondCard = true;
+
+						print("first card selected");
 					}
 				}
 				checkScoreing();
@@ -225,14 +268,30 @@ public class Pyramid : MonoBehaviour
 
 	void checkScoreing()
     {
-		print(currentValue);
+		if (currentValue == 13)
+		{
+			print(currentValue);
+			print("matched");
 
-		if(currentValue == 13)
-        {
 			waitForSecondCard = false;
 			currentValue = 0;
 
+			MoveToDiscard(firstCardSelected);
+			if (secondCardSelected != null)
+			{
+				MoveToDiscard(secondCardSelected);
+			}
+
+			SetPyramidVisiblity();
+
+			firstCardSelected = null;
+			secondCardSelected = null;
+			
 			//score a point
-        }
+		}
+		else if (!waitForSecondCard)
+		{
+			print("not a match:" + currentValue);
+		}
     }
 }

@@ -23,9 +23,9 @@ public class Layout : MonoBehaviour
     public Vector2 multiplier;
 
     public List<SlotDef> slotDefs;
-    public SlotDef drawPile, discardPile;
+    public SlotDef drawPile, discardPile, secondTarget;
 
-    public string[] sortingLayerNames = new string[] { "Row0", "Row1", "Row2", "Row3", "Row4", "Row5", "Row6", "Discard", "Draw" };
+    public string[] sortingLayerNames = new string[] { "Row0", "Row1", "Row2", "Row3", "Row4", "Row5", "Row6", "Discard", "Draw", "SecondTarget" };
 
     public void ReadLayout(string xmlText)
     {
@@ -83,6 +83,11 @@ public class Layout : MonoBehaviour
                 case "discardpile":
                     tSD.layerName = "Discard";
                     discardPile = tSD;
+                    break;
+
+                case "secondtarget":
+                    tSD.layerName = "SecondTarget";
+                    secondTarget = tSD;
                     break;
             }
         }

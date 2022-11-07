@@ -160,6 +160,8 @@ public class Pyramid : MonoBehaviour
 
 		cd.SetSortingLayerName(layout.discardPile.layerName);
 		cd.SetSortOrder(-100 + discardPile.Count);
+
+		SetPyramidVisiblity();
 	}
 
 	void MoveToTarget(CardPyramid cd)
@@ -177,6 +179,8 @@ public class Pyramid : MonoBehaviour
 		cd.faceUp = true;
 		cd.SetSortingLayerName(layout.discardPile.layerName);
 		target.SetSortOrder(targetStack.Count * 2);
+
+		SetPyramidVisiblity();
 	}
 
 	void RemoveFromTarget(CardPyramid cd)
@@ -192,6 +196,8 @@ public class Pyramid : MonoBehaviour
 		cd.faceUp = false;
 		cd.SetSortingLayerName(layout.discardPile.layerName);
 		cd.SetSortOrder(0);
+
+		SetPyramidVisiblity();
 	}
 
 	void UpdateDrawPile()
@@ -363,6 +369,8 @@ public class Pyramid : MonoBehaviour
 
 	bool checkValidMatches()
     {
+		SetPyramidVisiblity();
+
 		bool valid = false;
 
 		if (drawPile.Count > 0)

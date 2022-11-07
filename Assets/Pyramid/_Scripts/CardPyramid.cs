@@ -15,6 +15,8 @@ public class CardPyramid : Card
 
     private Vector3 moveTarget;
     private bool isMoving;
+    private float rotateing;
+    private float dist;
 
     public override void OnMouseUpAsButton()
     {
@@ -23,20 +25,25 @@ public class CardPyramid : Card
 
     private void Update()
     {
-        if(isMoving)
+        if (isMoving)
         {
             transform.position = Vector3.Lerp(transform.position, moveTarget, .1f);
 
-            if(Vector2.Distance(transform.position, moveTarget) < .1f)
+            dist = Vector2.Distance(transform.position, moveTarget);
+            transform.rotation = Quaternion.Euler(0, 0, dist * rotateing);
+
+            if (dist < .1f)
             {
                 isMoving = false;
             }
         }
     }
 
-    public void moveTo(Vector3 target)
+    public void moveTo(Vector3 target, float rot)
     {
         moveTarget = target;
+        rotateing = rot;
+
         isMoving = true;
     }
 }

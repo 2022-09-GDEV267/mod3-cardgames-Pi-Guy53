@@ -153,10 +153,10 @@ public class Pyramid : MonoBehaviour
 
 		cd.transform.parent = layoutAnchor;
 
-		cd.moveTo(layout.transform.position + layout.transform.up * 15);
+		cd.moveTo(layout.transform.position + layout.transform.up * 15, 10);
 
 		//cd.transform.localPosition = new Vector3(layout.multiplier.x * layout.discardPile.x, layout.multiplier.y * layout.discardPile.y, layout.discardPile.layerID + .5f);
-		cd.faceUp = false;
+		cd.faceUp = true;
 
 		cd.SetSortingLayerName(layout.discardPile.layerName);
 		cd.SetSortOrder(-100 + discardPile.Count);
@@ -173,7 +173,7 @@ public class Pyramid : MonoBehaviour
 
 		cd.transform.parent = layoutAnchor;
 
-		cd.moveTo(new Vector3(layout.multiplier.x * layout.discardPile.x, layout.multiplier.y * layout.discardPile.y, -targetStack.Count));
+		cd.moveTo(new Vector3(layout.multiplier.x * layout.discardPile.x, layout.multiplier.y * layout.discardPile.y, -targetStack.Count), 0);
 		//cd.transform.localPosition = new Vector3(layout.multiplier.x * layout.discardPile.x, layout.multiplier.y * layout.discardPile.y, -targetStack.Count);
 
 		cd.faceUp = true;
@@ -187,13 +187,20 @@ public class Pyramid : MonoBehaviour
     {
 		targetStack.Remove(cd);
 
-		target = targetStack[targetStack.Count - 1];
+		if (targetStack.Count > 0)
+		{
+			target = targetStack[targetStack.Count - 1];
+		}
+        else
+        {
+			target = null;
+        }
+
 		cd.state = pCardState.target;
 
 		cd.transform.parent = layoutAnchor;
 		cd.transform.localPosition = new Vector3(layout.multiplier.x * layout.discardPile.x, layout.multiplier.y * layout.discardPile.y, -layout.discardPile.layerID);
 
-		cd.faceUp = false;
 		cd.SetSortingLayerName(layout.discardPile.layerName);
 		cd.SetSortOrder(0);
 

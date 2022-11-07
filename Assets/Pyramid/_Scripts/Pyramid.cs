@@ -187,7 +187,7 @@ public class Pyramid : MonoBehaviour
     {
 		targetStack.Remove(cd);
 
-		target = cd;
+		target = targetStack[targetStack.Count - 1];
 		cd.state = pCardState.target;
 
 		cd.transform.parent = layoutAnchor;
@@ -326,6 +326,7 @@ public class Pyramid : MonoBehaviour
 		}
 	}
 
+	[ContextMenu("reScore")]
 	void checkScoreing()
     {
 		if (currentValue == 13)

@@ -13,8 +13,30 @@ public class CardPyramid : Card
 
     public bool isHidden;
 
+    private Vector3 moveTarget;
+    private bool isMoving;
+
     public override void OnMouseUpAsButton()
     {
         Pyramid.S.cardClicked(this);
+    }
+
+    private void Update()
+    {
+        if(isMoving)
+        {
+            transform.position = Vector3.Lerp(transform.position, moveTarget, .1f);
+
+            if(Vector2.Distance(transform.position, moveTarget) < .1f)
+            {
+                isMoving = false;
+            }
+        }
+    }
+
+    public void moveTo(Vector3 target)
+    {
+        moveTarget = target;
+        isMoving = true;
     }
 }

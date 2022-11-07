@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Pyramid : MonoBehaviour
 {
@@ -31,6 +33,12 @@ public class Pyramid : MonoBehaviour
 
 	public GameObject selectIndicator1;
 
+	public float delayRestart;
+	private Scene currentScene;
+
+	public Text roundResultsTxt;
+	public Text winLoseTxt;
+
     private void Awake()
     {
 		S = this;
@@ -51,6 +59,11 @@ public class Pyramid : MonoBehaviour
 		LayoutGame();
 
 		waitForSecondCard = false;
+
+		currentScene = SceneManager.GetActiveScene();
+
+		winLoseTxt.text = "";
+		roundResultsTxt.text = "";
 	}
 
 	CardPyramid Draw()
@@ -140,7 +153,9 @@ public class Pyramid : MonoBehaviour
 
 		cd.transform.parent = layoutAnchor;
 
-		cd.transform.localPosition = new Vector3(layout.multiplier.x * layout.discardPile.x, layout.multiplier.y * layout.discardPile.y, layout.discardPile.layerID + .5f);
+		cd.moveTo(layout.transform.position + layout.transform.up * 15);
+
+		//cd.transform.localPosition = new Vector3(layout.multiplier.x * layout.discardPile.x, layout.multiplier.y * layout.discardPile.y, layout.discardPile.layerID + .5f);
 		cd.faceUp = false;
 
 		cd.SetSortingLayerName(layout.discardPile.layerName);
@@ -155,7 +170,9 @@ public class Pyramid : MonoBehaviour
 		cd.state = pCardState.target;
 
 		cd.transform.parent = layoutAnchor;
-		cd.transform.localPosition = new Vector3(layout.multiplier.x * layout.discardPile.x, layout.multiplier.y * layout.discardPile.y, -targetStack.Count);
+
+		cd.moveTo(new Vector3(layout.multiplier.x * layout.discardPile.x, layout.multiplier.y * layout.discardPile.y, -targetStack.Count));
+		//cd.transform.localPosition = new Vector3(layout.multiplier.x * layout.discardPile.x, layout.multiplier.y * layout.discardPile.y, -targetStack.Count);
 
 		cd.faceUp = true;
 		cd.SetSortingLayerName(layout.discardPile.layerName);
@@ -229,10 +246,15 @@ public class Pyramid : MonoBehaviour
 				currentValue = 0;
 				showIndicators();
 
-				if(!checkValidMatches())
-                {
-					print("GAME OVER");
-                }					
+				if (checkValidMatches())
+				{
+					//still possible matches
+				}
+				else
+				{
+					print("game over");
+					endGame();
+				}
 
 				break;
 
@@ -335,6 +357,7 @@ public class Pyramid : MonoBehaviour
         else
         {
 			print("game over");
+			endGame();
         }
 	}
 
@@ -347,10 +370,10 @@ public class Pyramid : MonoBehaviour
 			return true;
 		}
 
-		if (target!=null && target.rank == 13)
-        {
+		if (target != null && target.rank == 13)
+		{
 			return true;
-        }
+		}
 
 		foreach(CardPyramid cd in pyramidLayout)
         {
@@ -380,5 +403,28 @@ public class Pyramid : MonoBehaviour
         }
 
 		return valid;
+    }
+
+	void endGame()
+    {
+		int cardCount = pyramidLayout.Count;
+
+		if (cardCount > 0)
+		{
+			roundResultsTxt.text = "You have " + cardCount + " cards left";
+			winLoseTxt.text = "GAME OVER";
+		}
+        else
+        {
+			roundResultsTxt.text = "You have " + cardCount + " cards left!";
+			winLoseTxt.text = "YOU WON!";
+		}
+
+		Invoke("delayedEndGame", delayRestart);
+	}
+
+	void delayedEndGame()
+    {
+		SceneManager.LoadScene(currentScene.name);
     }
 }

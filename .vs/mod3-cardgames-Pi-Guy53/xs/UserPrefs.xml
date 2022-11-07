@@ -2,25 +2,23 @@
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Pyramid/_Scripts/Pyramid.cs">
     <Files>
       <File FileName="Assets/01-Prospector/__Scripts/Deck.cs" Line="265" Column="20" />
-      <File FileName="Assets/01-Prospector/__Scripts/Prospector.cs" Line="171" Column="1" />
+      <File FileName="Assets/01-Prospector/__Scripts/Prospector.cs" />
       <File FileName="Assets/01-Prospector/__Scripts/Layout.cs" />
       <File FileName="Assets/01-Prospector/__Scripts/CardProspector.cs" />
-      <File FileName="Assets/01-Prospector/__Scripts/Card.cs" Line="32" Column="1" />
-      <File FileName="Assets/Pyramid/_Scripts/CardPyramid.cs" Line="18" Column="37" />
-      <File FileName="Assets/Pyramid/_Scripts/Pyramid.cs" Line="209" Column="25" />
+      <File FileName="Assets/01-Prospector/__Scripts/Card.cs" />
+      <File FileName="Assets/Pyramid/_Scripts/CardPyramid.cs" />
+      <File FileName="Assets/Pyramid/_Scripts/Pyramid.cs" Line="209" Column="22" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="mod3-cardgames-Pi-Guy53" expanded="True">
-            <Node name="Assets" expanded="True">
+            <Node name="Assets" expanded="True" selected="True">
               <Node name="01-Prospector" expanded="True">
                 <Node name="__Scripts" expanded="True" />
               </Node>
               <Node name="Pyramid" expanded="True">
-                <Node name="_Scripts" expanded="True">
-                  <Node name="Pyramid.cs" selected="True" />
-                </Node>
+                <Node name="_Scripts" expanded="True" />
                 <Node name="resources" expanded="True" />
               </Node>
             </Node>
@@ -31,7 +29,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="c56ed257-b2e6-4e36-af66-d2ac681c0aa0" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="8c66ab06-a20e-40ea-8544-fcd6bebe3c4d" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -244,6 +244,28 @@ public class Pyramid : MonoBehaviour
 		}
 	}
 
+	void reShuffleDeck()
+    {
+		drawPile = targetStack;
+
+		targetStack = new List<CardPyramid>();
+
+		CardPyramid cd;
+
+		for (int i = 0; i < drawPile.Count; i++)
+		{
+			cd = drawPile[i];
+			cd.transform.parent = layoutAnchor;
+			Vector2 dpStagger = layout.drawPile.stagger;
+			cd.transform.localPosition = new Vector3(layout.multiplier.x * (layout.drawPile.x + i * dpStagger.x), layout.multiplier.y * (layout.drawPile.y + i * dpStagger.y), -layout.drawPile.layerID + .1f * i);
+
+			cd.faceUp = false;
+			cd.state = pCardState.drawpile;
+			cd.SetSortingLayerName(layout.drawPile.layerName);
+			cd.SetSortOrder(-10 * i);
+		}
+	}
+
 	public void cardClicked(CardPyramid cd)
     {
 		switch(cd.state)
@@ -384,6 +406,11 @@ public class Pyramid : MonoBehaviour
 		if (drawPile.Count > 0)
 		{
 			return true;
+		}
+		else if(targetStack.Count > 0)
+        {
+			//reShuffleDeck();
+			//return true;
 		}
 
 		if (target != null && target.rank == 13)

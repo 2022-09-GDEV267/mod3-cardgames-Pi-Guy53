@@ -27,7 +27,7 @@ public class CardPyramid : Card
     {
         if (isMoving)
         {
-            transform.position = Vector3.Lerp(transform.position, moveTarget, .1f);
+            transform.position = Vector3.Lerp(transform.position, moveTarget, 6 * Time.deltaTime);
 
             dist = Vector2.Distance(transform.position, moveTarget);
             transform.rotation = Quaternion.Euler(0, 0, dist * rotateing);
